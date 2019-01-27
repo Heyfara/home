@@ -1,0 +1,13 @@
+easy_admin:
+    entities:
+        User:
+            class: App\Entity\User
+            form:
+                fields: ['email']
+            new:
+                fields:
+                    - { property: 'plainPassword', type: 'text', label: 'Password', type_options: { required: true }}
+    design:
+        menu:
+            - { entity: User, icon: 'user' }
+            - { label: 'Stats', route: 'water_stats', icon: 'pie-chart', params: {'menuIndex': 1} }
