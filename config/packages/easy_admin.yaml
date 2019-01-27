@@ -7,7 +7,14 @@ easy_admin:
             new:
                 fields:
                     - { property: 'plainPassword', type: 'text', label: 'Password', type_options: { required: true }}
+        PelletRecord:
+            class: App\Entity\PelletRecord
+        WaterRecord:
+            class: App\Entity\WaterRecord
+
     design:
         menu:
+            - { label: 'Stats', route: 'water_stats', icon: 'pie-chart', params: {'menuIndex': 0} }
+            - { entity: WaterRecord, icon: 'tint' }
+            - { entity: PelletRecord, icon: 'fire' }
             - { entity: User, icon: 'user' }
-            - { label: 'Stats', route: 'water_stats', icon: 'pie-chart', params: {'menuIndex': 1} }
