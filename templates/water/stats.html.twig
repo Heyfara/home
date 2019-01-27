@@ -1,11 +1,17 @@
 {% extends '@EasyAdmin/default/layout.html.twig' %}
 
+{% block head_javascript %}
+    <script src="{{ asset('bundles/easyadmin/app.js') }}"></script>
+    {% include 'water/charts.html.twig' %}
+{% endblock %}
+
 {% block content_title %}
     Statistiques sur l'utilisation de l'eau à la maison
 {% endblock %}
 
 {% block main %}
     Des graphiques ici...
+    <div id="myPieChart"/>
 {% endblock %}
 
 {% block content_footer %}

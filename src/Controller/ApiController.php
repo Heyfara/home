@@ -3,8 +3,9 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Charts\DataTable;
 
 /**
  *
@@ -23,6 +24,14 @@ class ApiController extends AbstractController
      */
     public function addRecord()
     {
-        dump("new record...");die();
+        $table = new DataTable();
+        $table->addCol('string', 'Element');
+        $table->addCol('number', 'Percentage');
+
+        $table->addRow(['Nitrogen', 0.7]);
+        $table->addRow(['Oxygen', 0.21]);
+        $table->addRow(['Other', 0.01]);
+
+        return new JsonResponse($table);
     }
 }
