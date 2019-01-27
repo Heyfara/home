@@ -8,7 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 /**
  *
- * COntroller used to manage water records in back office
+ * Controller used to manage water records in back office
  *
  * @Route("/admin")
  */
@@ -22,15 +22,5 @@ class WaterController extends AbstractController
     public function waterStats()
     {
         return $this->render('water/stats.html.twig');
-    }
-
-    /**
-     * Add a new water record to the database
-     *
-     * @Route("/water/add", name="water_add")
-     */
-    public function newRecord()
-    {
-        dump("new record...");die();
     }
 }
