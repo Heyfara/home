@@ -5,6 +5,7 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Service\WaterRecordService;
 
 /**
  *
@@ -14,6 +15,13 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class WaterController extends AbstractController
 {
+    protected $waterService;
+
+    public function __construct(WaterRecordService $waterService)
+    {
+        $this->waterService = $waterService;
+    }
+
     /**
      * Display water record related statistics in the back office
      *
@@ -21,6 +29,7 @@ class WaterController extends AbstractController
      */
     public function waterStats()
     {
-        return $this->render('water/stats.html.twig');
+        $totalVolume = $this->waterService->getTotalVolume();
+        return $this->render('water/stats.html.twig', ['totalVolume' => $totalVolume]);
     }
 }

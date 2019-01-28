@@ -33,6 +33,11 @@ class PelletRecord
      */
     private $date;
 
+    public function __construct()
+    {
+        $this->date = new \DateTime('now');
+    }
+
     public function getId(): ?int
     {
         return $this->id;

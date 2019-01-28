@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\WaterRecord;
+use App\Service\WaterRecordService;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
@@ -19,32 +20,32 @@ class WaterRecordRepository extends ServiceEntityRepository
         parent::__construct($registry, WaterRecord::class);
     }
 
-    // /**
-    //  * @return WaterRecord[] Returns an array of WaterRecord objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    /**
+     * Finds the sum of all volumes in the database
+     */
+    public function findTotalVolume(): int
     {
         return $this->createQueryBuilder('w')
-            ->andWhere('w.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('w.id', 'ASC')
-            ->setMaxResults(10)
+            ->select('SUM(w.volume) as volume')
             ->getQuery()
-            ->getResult()
-        ;
+            ->getSingleScalarResult();
     }
-    */
 
-    /*
-    public function findOneBySomeField($value): ?WaterRecord
+    /**
+     * Finds all records for the given dates
+     * grouped by the given period
+     *
+     * This is used to build charts
+     */
+    public function findAllByPeriod($from, $to, $period)
     {
         return $this->createQueryBuilder('w')
-            ->andWhere('w.exampleField = :val')
-            ->setParameter('val', $value)
+            ->select('SUM(w.volume) as volume, ' . $period . '(w.date) as ' . $period . ', w.date')
+            ->andWhere('w.date BETWEEN :start AND :end')
+            ->setParameter('start', $from)
+            ->setParameter('end', $to)
+            ->groupBy($period)
             ->getQuery()
-            ->getOneOrNullResult()
-        ;
+            ->getResult();
     }
-    */
 }

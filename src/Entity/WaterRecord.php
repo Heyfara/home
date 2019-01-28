@@ -20,10 +20,7 @@ class WaterRecord
     private $id;
 
     /**
-     * Volume of water displayed on the water meter
-     *
-     * The volume is the total volume indicated by the 
-     * water meter and not the amount used since the last record
+     * Volume of water
      *
      * @ORM\Column(type="integer")
      */
@@ -36,9 +33,8 @@ class WaterRecord
      */
     private $date;
 
-    public function __construct($volume)
+    public function __construct()
     {
-        $this->volume = $volume;
         $this->date = new \DateTime('now');
     }
 

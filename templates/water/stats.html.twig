@@ -10,10 +10,13 @@
 {% endblock %}
 
 {% block main %}
-    Des graphiques ici...
-    <div id="myPieChart"/>
+    <div class="row py-5">
+        <div class="col-10 offset-2">
+            <div id="myPieChart"/>
+            </div>
+        </div>
 {% endblock %}
 
 {% block content_footer %}
-    Footer...
+    Volume total consommé : {{ totalVolume }} litres
 {% endblock %}
