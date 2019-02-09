@@ -33,9 +33,16 @@ class PelletRecord
      */
     private $date;
 
+    /**
+     * Whether the ashtray has been emptied
+     * @ORM\Column(type="boolean")
+     */
+    private $emptyAshtray;
+
     public function __construct()
     {
         $this->date = new \DateTime('now');
+        $this->emptyAshtray = false;
     }
 
     public function getId(): ?int
@@ -63,6 +70,18 @@ class PelletRecord
     public function setDate(\DateTimeInterface $date): self
     {
         $this->date = $date;
+
+        return $this;
+    }
+
+    public function getEmptyAshtray(): ?bool
+    {
+        return $this->emptyAshtray;
+    }
+
+    public function setEmptyAshtray(bool $emptyAshtray): self
+    {
+        $this->emptyAshtray = $emptyAshtray;
 
         return $this;
     }
